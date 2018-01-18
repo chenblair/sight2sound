@@ -6,16 +6,15 @@
 # Change these:
 # The input file must be grayscale
 
-
 def main():
-	input_file = '64x64.png'
-	output_wav = 'output.wav'
+	input_file = 'testImage1.png'
+	output_wav = 'testImage1.wav'
 
 # Keep this number low.
 # It takes ages to generate
 #	num_seconds = 0.5
 
-	lowest_frequency = 220 # In hz!
+	lowest_frequency = 30 # In hz!
 	highest_frequency = 8410
 	frequency_step = 2
 
@@ -54,6 +53,7 @@ def main():
 
 # Get the size of the image
 	x,y = img.size
+	print(x, y)
 # It doesn't fit the criteria. Tish tish tish.
 	if ((x != y) or (checkPowerOf2(x) == False)):
 		exit("The image has to be a power of 2.")
@@ -64,14 +64,46 @@ def main():
 # We create the output list
 	output = []
 # Then, we iterate over every pixel.
+	"""testImage0 = np.zeros((64, 64))
+	testImage1 = np.zeros((64, 64))"""
 	for i in range(0,x**2):
 	# hc.d2xy() Turns a linear integer
 	# into the x,y coordinates of a plane.
 		hilbert = hc.d2xy(math.log(x*y,2),i)
-
+		"""
+		if i <20:
+			testImage0[hilbert[0]][hilbert[1]] = 255
+		elif i > 4075:
+			testImage1[hilbert[0]][hilbert[1]] = 255
+		"""
 	# Use those coordinates to get the pixel value
 	# And thus serialise a 2d plane.
 		output.append(pixels[hilbert])
+	"""
+	print(testImage0)
+	print(testImage1)
+	testImage0 = Image.fromarray(np.uint8(testImage0) , 'L')
+	testImage1 = Image.fromarray(np.uint8(testImage1) , 'L')
+	testImage0.save("testImage0.png")
+	testImage1.save("testImage1.png")
+	testImage2 = np.zeros((64, 64))
+	for i in range(0, 32):
+		testImage2[i] = np.full((64), 255)
+	print(testImage2)
+	testImage2 = Image.fromarray(np.uint8(testImage2), 'L')
+	testImage2.save("testImage2.png")
+	
+	testImage3 = np.full((64, 64), 255)
+	print(testImage3)
+	(x, y) = testImage3.shape
+	print(x, y)
+	for i in range(len(testImage3)):
+		for j in range(len(testImage3[0])):
+			assert(testImage3[i][j] == 255)
+	testImage3 = Image.fromarray(np.uint8(testImage3), 'L')
+	print(testImage3.size)
+	testImage3.save("testImage3.png")
+	"""
 
 	print ("Generating audio...")
 # Generate the Audio output list
@@ -95,8 +127,8 @@ def main():
 	# The way I mapped those frequencies is arbitary, except that I tried to make it
 	# so the frequencies were within the loudest part of human hearing ~ 220hz to 2561hz
 		#frequency = 2**(pixelNo/frequency_n)*lowest_frequency
-		frequency += 2
 		totalAmplitudesOverTime += 1/255 * pixel * np.sin(frequency*2*np.pi*myx)
+		frequency += 2
 	#for t in range(0,len(outputAudio)):
 		# Constantly layer the audio on top of one another until it's complete
 		# We use a really big offset to t becuase if we don't we get a really weird tone that quickly
