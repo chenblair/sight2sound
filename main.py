@@ -55,11 +55,15 @@ def main():
             exit("The image has to be a power of 2.")
 
         print("Serialising pixels...")
-        output = []
+        output = [
+                pixels[hc.d2xy(math.log(x * y, 2), i)]
+                for i in range(x*x)
+                ]
+        """
         for i in range(0, x ** 2):
             hilbert = hc.d2xy(math.log(x * y, 2), i)
             output.append(pixels[hilbert])
-
+        """
         print("Generating audio...")
         sample_rate = 44100.0  # in Hz
         signal_time_length = 1  # in seconds
