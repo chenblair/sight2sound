@@ -16,12 +16,14 @@ def main():
 #	num_seconds = 0.5
 
 	lowest_frequency = 220 # In hz!
+	highest_frequency = 8410
+	frequency_step = 2
 
 # A value that directly detirmines the frequency
 # Find the highest frequency with this:
 # 2**(255/frequency_n)*lowest_frequency
 # That puts the max frequency at just under 2562hz
-	frequency_n = 72 # Not in hz!
+	#frequency_n = 72 # Not in hz!
 
 # ===========================================================================
 
@@ -82,6 +84,7 @@ def main():
 
 	myx = np.linspace(0, 2*np.pi*N*T, N)
 	totalAmplitudesOverTime = np.zeros(int(N))
+	frequency = lowest_frequency
 	for pixel in output:
 	# if pixel_count % 10 == 0:
 		#print (pixel_count,"pixels completed out of", x*y, "          ", end="\r")
@@ -91,8 +94,9 @@ def main():
 	# The human ear works. That made the most sence to me.
 	# The way I mapped those frequencies is arbitary, except that I tried to make it
 	# so the frequencies were within the loudest part of human hearing ~ 220hz to 2561hz
-		frequency = 2**(pixel/frequency_n)*lowest_frequency;
-		totalAmplitudesOverTime += np.sin(frequency*2*np.pi*myx)
+		#frequency = 2**(pixelNo/frequency_n)*lowest_frequency
+		frequency += 2
+		totalAmplitudesOverTime += 1/255 * pixel * np.sin(frequency*2*np.pi*myx)
 	#for t in range(0,len(outputAudio)):
 		# Constantly layer the audio on top of one another until it's complete
 		# We use a really big offset to t becuase if we don't we get a really weird tone that quickly
