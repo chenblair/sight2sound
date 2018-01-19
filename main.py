@@ -95,7 +95,8 @@ def main():
     """
     #print("Serialising pixels...")
     #output = [pixels[curve[i]] for i in range(x*x)]
-    output = [gPic[curve[i][0]][curve[i][1]] for i in range(res1*res1)]
+    def f(pvalue): return 0 if pvalue < 128 else 255
+    output = [f(gPic[curve[i][0]][curve[i][1]]) for i in range(res1*res1)]
 
     """
     output = [ 
@@ -110,11 +111,8 @@ def main():
     ### BEGIN IRFFT ROUTINE
     fs = np.zeros(N//2 + 1)
     frequency = lowest_frequency
-    C0 = 440*math.pow(2,-4.75)
     for i in range(len(output)):
-      #fs[int(frequency*T*N)] = 1 / 255 * output[i] #this will be the amplitude for this frequency
-      q =  round(12*math.log2(frequency/C0))
-      fs[int(q*T*N)] = 1 / 255 * output[i] #this will be the amplitude for this frequency
+      fs[int(frequency*T*N)] = 1 / 255 * output[i] #this will be the amplitude for this frequency
       frequency += frequency_step
 
     outputAudio = np.fft.irfft(fs)
