@@ -45,7 +45,7 @@ def setup_camera_taker():
     rgbPic = np.empty((res1 * res1 * 3,), dtype=np.uint8)
     camera.capture(rgbPic, 'rgb')
     rgbPic = rgbPic.reshape((res1, res2, 3))
-    print("here")
+    #print("here")
 
     global gPic
     gPic = [[
@@ -53,7 +53,7 @@ def setup_camera_taker():
       for j in range(res2)
     ] for i in range(res1)]
     mutex.release()
-    sleep(.7) #TODO TWEAK THIS
+    sleep(0) #TODO TWEAK THIS
 
 def main():
   #input_file = '64x64.png'
