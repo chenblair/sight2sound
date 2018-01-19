@@ -146,7 +146,10 @@ def main():
     print(np.mean(outputAudio))
 
     byte_data = outputAudio.astype('float32').tobytes()
-    out.write(byte_data)
+    #out.write(byte_data)
+    wavout = wave.open(output_wav,'wb')
+    wavout.setparams((1,4,44100,0,'NONE','not compressed'))
+    wavout.writeframes(outputAudio.astype('float32').tobytes())
     print("sleeping")
     sleep(20)
     print("exiting")
