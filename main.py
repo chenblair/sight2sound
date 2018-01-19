@@ -53,6 +53,7 @@ def setup_camera_taker():
     ] for i in range(res1)]
     #print("here")
     mutex.release()
+    print("here")
     sleep(.7) #TODO TWEAK THIS
 
 def main():
