@@ -51,9 +51,8 @@ def setup_camera_taker():
       (0.3 * rgbPic[i][j][0]) + (0.59 * rgbPic[i][j][1]) + (0.11 * rgbPic[i][j][2])
       for j in range(res2)
     ] for i in range(res1)]
-    #print("here")
-    mutex.release()
     print("here")
+    mutex.release()
     sleep(.7) #TODO TWEAK THIS
 
 def main():
