@@ -141,6 +141,8 @@ def main():
     outputAudio += 1  
     outputAudio *= 16384 * 2
 
+    print(np.mean(outputAudio))
+
     byte_data = outputAudio.astype('float32').tobytes()
     out.write(byte_data)
     exit()
