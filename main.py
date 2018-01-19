@@ -140,7 +140,11 @@ def main():
     
     outputAudio += 1  
     outputAudio *= 16384 * 2
-
+    print("max")
+    print(np.ndarray.max(outputAudio))
+    print("min")
+    print(np.ndarray.min(outputAudio))
+    print("mean of audio")
     print(np.mean(outputAudio))
 
     byte_data = outputAudio.astype('float32').tobytes()
