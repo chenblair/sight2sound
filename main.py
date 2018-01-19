@@ -145,6 +145,8 @@ def main():
 
     byte_data = outputAudio.astype('float32').tobytes()
     out.write(byte_data)
+    print("sleeping")
+    sleep(20)
     print("exiting")
     exit()
 
