@@ -134,10 +134,11 @@ def main():
     #scale = 65536 / diff
     outputAudio -= np.ndarray.min(outputAudio)
     outputAudio *= 1310.72
-    """
+    outputAudio = np.sin(2*np.pi*440*np.arange(N*T))
+
+    
     outputAudio += 1  
     outputAudio *= 16384 * 2
-    """
 
     byte_data = outputAudio.astype('float32').tobytes()
     out.write(byte_data)
