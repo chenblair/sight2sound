@@ -47,7 +47,7 @@ def setup_camera_taker():
     rgbPic = rgbPic.reshape((res1, res2, 3))
 
     global gPic
-    gpic = [[
+    gPic = [[
       (0.3 * rgbPic[i][j][0]) + (0.59 * rgbPic[i][j][1]) + (0.11 * rgbPic[i][j][2])
       for j in range(res2)
     ] for i in range(res1)]
