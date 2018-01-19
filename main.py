@@ -58,7 +58,7 @@ def setup_camera_taker():
     sleep(0.7) #TODO TWEAK THIS
 
 def main():
-  input_file = 'testQuad4.png'
+  input_file = 'testQuad3.png'
 
   # BEGIN SETTING UP AUDIO OUT
   out = alsaaudio.PCM(alsaaudio.PCM_PLAYBACK, 
@@ -159,7 +159,7 @@ def main():
     
     
     import wave
-    with open("testQuad41e-1009.wav","wb") as f:
+    with open("testQuad31e-100.wav","wb") as f:
       wavout = wave.open(f,'wb')
       wavout.setparams((1,2,44100,0,'NONE','not compressed'))
       wavout.writeframes(byte_data)
