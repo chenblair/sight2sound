@@ -86,7 +86,7 @@ def main():
   frequency_step = (highest_frequency - lowest_frequency)/(res1*res1)
 
   while True:
-    
+
     mutex.acquire()
     """
     #TODO we shouldn't have to load an image file, just take it directly from camera
@@ -98,8 +98,8 @@ def main():
     #output = [pixels[curve[i]] for i in range(x*x)]
     #def f(pvalue): return 0 if pvalue < 128 else 255
     def f(p):return p
-    output = [f(gPic[curve[i][0]][curve[i][1]]) for i in range(res1*res1)]
     print("here2")
+    output = [gPic[curve[i][0]][curve[i][1]] for i in range(res1*res1)]
     """
     output = [ 
         pixels[hc.d2xy(math.log(x * y, 2), i)]
