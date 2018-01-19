@@ -16,8 +16,8 @@ mutex = Semaphore(value=0)
 signal_time_length = .2  # in seconds
 sample_rate = 44100.0  # in Hz
 
-res1 = 64
-res2 = 64
+res1 = 16
+res2 = 16
 
 def isPowOf2(num):
   return ((num & (num - 1)) == 0) and num != 0
@@ -82,7 +82,7 @@ def main():
   # END SETTING UP HILBERT CURVE
 
   lowest_frequency = 50  # In hz!
-  highest_frequency = 20000#8410
+  highest_frequency = 8410
   frequency_step = (highest_frequency - lowest_frequency)/(res1*res1)
 
   while True:
