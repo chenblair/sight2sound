@@ -13,17 +13,17 @@ from threading import Thread, Semaphore
 
 mutex = Semaphore(value=0)
 
-signal_time_length = 1  # in seconds
+signal_time_length = .1  # in seconds
 sample_rate = 44100.0  # in Hz
 
-res1 = 2048
-res2 = 2048
+res1 = 64
+res2 = 64
 
 def isPowOf2(num):
   return ((num & (num - 1)) == 0) and num != 0
 
 if ((res1 != res2) or not isPowOf2(res1)):
-      exit("The image has to be a power of 2.")
+  exit("The image has to be a power of 2.")
 
 gPic = None
 
