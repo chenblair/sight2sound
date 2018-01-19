@@ -122,7 +122,7 @@ def main():
       fs[int(frequency*T*N)] = output[i] #this will be the amplitude for this frequency
       frequency += frequency_step
     
-    with open("pixelIntensitysQuad3.txt","wb") as f:
+    with open("pixelIntensitysQuad3.txt","w") as f:
       for i in range(len(fs)):
         f.write(fs[i])
         f.write("\n")
