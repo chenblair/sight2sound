@@ -1,12 +1,13 @@
 # pythone 3
-# Change these:
+
 # The input file must be grayscale
 
 import hilbert_curve as hc
 from PIL import Image
-import math
+#import math
 from time import sleep
 import alsaaudio
+from picamera import PiCamera
 import numpy as np
 from threading import Thread, Semaphore
 
@@ -14,30 +15,35 @@ mutex = Sempahore(value=0)
 
 signal_time_length = 1  # in seconds
 sample_rate = 44100.0  # in Hz
-# outAudio = None
+"""
+ outAudio = None
 
-# def playInfiniteAudio():
-#   out = alsaaudio.PCM(alsaaudio.PCM_PLAYBACK, 
-#             device='default', 
-#             mode=alsaaudio.PCM_NONBLOCK)
-#   out.setchannels(1)
-#   out.setrate(int(sample_rate))
-#   out.setformat(alsaaudio.PCM_FORMAT_U32_BE)
-#   out.setperiodsize(int(sample_rate)) #TODO this may be too big
-#   count = 0
-#   while True:
-#     while outAudio is None:
-#       print("Sleeping for eternity..." + str(count + 1))
-#       count += 1
-#       sleep(1)
-# 
-#     print("Playing...")
-#     mutex.acquire()
-#     assert(len(outAudio)==4*int(sample_rate*signal_time_length)) #TODO this will need to commented out when in production
-#     out.write(outAudio)
-#     mutex.release()
-#     sleep(signal_time_length*5)
-#     print("Played")
+ def playInfiniteAudio():
+   out = alsaaudio.PCM(alsaaudio.PCM_PLAYBACK, 
+             device='default', 
+             mode=alsaaudio.PCM_NONBLOCK)
+   out.setchannels(1)
+   out.setrate(int(sample_rate))
+   out.setformat(alsaaudio.PCM_FORMAT_U32_BE)
+   out.setperiodsize(int(sample_rate)) #TODO this may be too big
+   count = 0
+   while True:
+     while outAudio is None:
+       print("Sleeping for eternity..." + str(count + 1))
+       count += 1
+       sleep(1)
+ 
+     print("Playing...")
+     mutex.acquire()
+     assert(len(outAudio)==4*int(sample_rate*signal_time_length)) #TODO this will need to commented out when in production
+     out.write(outAudio)
+     mutex.release()
+     sleep(signal_time_length*5)
+     print("Played")
+"""
+
+def isPowOf2(num):
+  return ((num & (num - 1)) == 0) and num != 0
 
 def setup_camera_taker():
   while True:
@@ -47,6 +53,25 @@ def setup_camera_taker():
 def main():
   input_file = '64x64.png'
 
+  # BEGIN SETTING UP CAMERA
+  camera = PiCamera()
+  camera.resolution = (64, 64)
+  # camera.resolution = (2, 2)
+  camera.start_preview()
+  # Camera warm-up time
+  sleep(2)
+
+  camera.shutter_speed = camera.exposure_speed
+  camera.exposure_mode = 'off'
+  g = camera.awb_gains
+  camera.awb_mode = 'off'
+  camera.awb_gains = g
+
+  for filename in camera.capture_continuous('img{counter:03d}.png'):
+    print('Captured %s' % filename)
+  # END SETTING UP CAMERA
+
+  # BEGIN SETTING UP AUDIO OUT
   out = alsaaudio.PCM(alsaaudio.PCM_PLAYBACK, 
             device='default', 
             mode=alsaaudio.PCM_NONBLOCK)
@@ -54,6 +79,7 @@ def main():
   out.setrate(int(sample_rate))
   out.setformat(alsaaudio.PCM_FORMAT_U32_BE)
   out.setperiodsize(int(sample_rate)) #TODO this may be too big
+  # END SETTING UP AUDIO OUT
 
   t = Thread(target=setup_camera_taker)
   t.start()
@@ -62,26 +88,22 @@ def main():
   highest_frequency = 8410
   frequency_step = 2
 
-  def checkPowerOf2(num):
-    return ((num & (num - 1)) == 0) and num != 0
-
   while True:
     mutex.acquire()
     img = Image.open(input_file).convert("L")
     pixels = img.load()
 
     x, y = img.size
-    if ((x != y) or (checkPowerOf2(x) == False)):
+    if ((x != y) or !isPowOf2(x)):
       exit("The image has to be a power of 2.")
 
     #print("Serialising pixels...")
-    output = [
+    output = [ #TODO remember the hc, for faster processing of future images
         pixels[hc.d2xy(math.log(x * y, 2), i)]
         for i in range(x*x)
         ]
 
     #print("Generating audio...")
-    
     T = 1 / sample_rate  # spacing between sample points
     N = int(sample_rate * signal_time_length)  # number of sample points
 
@@ -93,7 +115,6 @@ def main():
       frequency += frequency_step
 
     outputAudio = np.fft.irfft(fs)
-
     ### END IRFFT ROUTINE
 
     #print('\n:len of outputAudio :' + str(len(outputAudio)))
@@ -105,6 +126,5 @@ def main():
 
     byte_data = outputAudio.astype('float32').tobytes()
     out.write(byte_data)
-    
 
 if __name__ == '__main__': main()
