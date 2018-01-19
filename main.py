@@ -44,7 +44,7 @@ def setup_camera_taker():
   while True:
     rgbPic = np.empty((res1 * res1 * 3,), dtype=np.uint8)
     camera.capture(rgbPic, 'rgb')
-    rgbPic = rgbPic.reshape((res1, res2, 3))
+    rgbPic = rgbPic.reshape((res1, res1, 3))
     print("here")
 
     global gPic
@@ -86,6 +86,7 @@ def main():
   frequency_step = (highest_frequency - lowest_frequency)/(res1*res1)
 
   while True:
+    print("here2")
     mutex.acquire()
     """
     #TODO we shouldn't have to load an image file, just take it directly from camera
