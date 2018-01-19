@@ -12,8 +12,9 @@ import numpy as np
 from threading import Thread, Semaphore
 
 mutex = Semaphore(value=0)
+cameraSem = Semaphore(value=1)
 
-signal_time_length = 1  # in seconds
+signal_time_length = 0.8  # in seconds
 sample_rate = 44100.0  # in Hz
 
 res1 = 64
@@ -44,6 +45,7 @@ def setup_camera_taker():
   while True:
     rgbPic = np.empty((res1 * res1 * 3,), dtype=np.uint8)
     #print("before capture")
+    cameraSem.acquire()
     camera.capture(rgbPic, 'rgb')
     #print("after capture")
     rgbPic = rgbPic.reshape((res1, res1, 3))
@@ -55,7 +57,8 @@ def setup_camera_taker():
       for j in range(res2)
     ] for i in range(res1)]
     mutex.release()
-    sleep(0.7) #TODO TWEAK THIS
+    """sleep(0.7) #TODO TWEAK THIS
+    """
 
 def main():
   input_file = 'testQuad4.png'
@@ -165,7 +168,8 @@ def main():
 
     byte_data = outputAudio.astype('float16').tobytes()
     out.write(byte_data)
-    
+    cameraSem.release()
+    """
     import wave
     with open(input_file+"1e-100.wav","wb") as f:
       wavout = wave.open(f,'wb')
@@ -173,6 +177,7 @@ def main():
       wavout.writeframes(byte_data)
     print("sleeping")
     sleep(20)
+    """
     
 
 if __name__ == '__main__': main()
