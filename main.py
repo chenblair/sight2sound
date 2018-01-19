@@ -152,9 +152,9 @@ def main():
       wavout = wave.open(f,'wb')
       wavout.setparams((1,4,44100,0,'NONE','not compressed'))
       wavout.writeframes(outputAudio.astype('float32').tobytes())
-      print("sleeping")
-      sleep(20)
-      print("exiting")
+    print("sleeping")
+    sleep(20)
+    print("exiting")
     exit()
 
 if __name__ == '__main__': main()
