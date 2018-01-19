@@ -136,7 +136,7 @@ def main():
     print(np.ndarray.min(outputAudio))
     print("mean of audio")
     print(np.mean(outputAudio))
-    outputAudio *=1e-3
+    outputAudio *=1e-6
     #diff = np.ndarray.max(outputAudio) - np.ndarray.min(outputAudio)
     #scale = 65536 / diff
     #outputAudio -= np.ndarray.min(outputAudio)
@@ -158,7 +158,7 @@ def main():
     
     
     import wave
-    with open("testQuad4test2smaller.wav","wb") as f:
+    with open("testQuad4test2smaller2.wav","wb") as f:
       wavout = wave.open(f,'wb')
       wavout.setparams((1,2,44100,0,'NONE','not compressed'))
       wavout.writeframes(byte_data)
