@@ -19,13 +19,14 @@ sample_rate = 44100.0  # in Hz
 res1 = 64
 res2 = 64
 
+def isPowOf2(num):
+  return ((num & (num - 1)) == 0) and num != 0
+
 if ((res1 != res2) or not isPowOf2(res1)):
       exit("The image has to be a power of 2.")
 
 gPic = None
 
-def isPowOf2(num):
-  return ((num & (num - 1)) == 0) and num != 0
 
 def setup_camera_taker():
   camera = PiCamera()
