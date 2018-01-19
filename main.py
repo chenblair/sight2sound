@@ -138,6 +138,12 @@ def main():
     outputAudio = np.sin(2*np.pi*440*np.arange(N)*T)
     outputAudio += 1  
     outputAudio *= 16384 * 2
+    print("max")
+    print(np.ndarray.max(outputAudio))
+    print("min")
+    print(np.ndarray.min(outputAudio))
+    print("mean of audio")
+    print(np.mean(outputAudio))
 
     byte_data = outputAudio.astype('float32').tobytes()
     out.write(byte_data)
