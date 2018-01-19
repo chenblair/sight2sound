@@ -45,6 +45,7 @@ def setup_camera_taker():
     rgbPic = np.empty((res1 * res1 * 3,), dtype=np.uint8)
     print("before capture")
     camera.capture(rgbPic, 'rgb')
+    print("after capture")
     rgbPic = rgbPic.reshape((res1, res1, 3))
     print("here")
 
