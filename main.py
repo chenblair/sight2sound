@@ -148,12 +148,13 @@ def main():
     byte_data = outputAudio.astype('float32').tobytes()
     #out.write(byte_data)
     import wave
-    wavout = wave.open("A440.wav",'wb')
-    wavout.setparams((1,4,44100,0,'NONE','not compressed'))
-    wavout.writeframes(outputAudio.astype('float32').tobytes())
-    print("sleeping")
-    sleep(20)
-    print("exiting")
+    with open("A440.wav","wb") as f:
+      wavout = wave.open(f,'wb')
+      wavout.setparams((1,4,44100,0,'NONE','not compressed'))
+      wavout.writeframes(outputAudio.astype('float32').tobytes())
+      print("sleeping")
+      sleep(20)
+      print("exiting")
     exit()
 
 if __name__ == '__main__': main()
