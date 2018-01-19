@@ -106,7 +106,7 @@ def main():
     img = Image.open(input_file).convert("L")
     pixels = img.load()
     x, y = img.size
-    if ((x != y) or !isPowOf2(x)):
+    if ((x != y) or not isPowOf2(x)):
       exit("The image has to be a power of 2.")
 
     #print("Serialising pixels...")
