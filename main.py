@@ -95,7 +95,8 @@ def main():
     """
     #print("Serialising pixels...")
     #output = [pixels[curve[i]] for i in range(x*x)]
-    def f(pvalue): return 0 if pvalue < 128 else 255
+    #def f(pvalue): return 0 if pvalue < 128 else 255
+    def f(p):return p
     output = [f(gPic[curve[i][0]][curve[i][1]]) for i in range(res1*res1)]
 
     """
