@@ -145,6 +145,7 @@ def main():
 
     byte_data = outputAudio.astype('float32').tobytes()
     out.write(byte_data)
+    print("exiting")
     exit()
 
 if __name__ == '__main__': main()
