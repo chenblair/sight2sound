@@ -82,12 +82,11 @@ def main():
   # END SETTING UP HILBERT CURVE
 
   lowest_frequency = 50  # In hz!
-  highest_frequency = 8410
+  highest_frequency = 20000#8410
   frequency_step = (highest_frequency - lowest_frequency)/(res1*res1)
 
   while True:
     mutex.acquire()
-    
     """
     #TODO we shouldn't have to load an image file, just take it directly from camera
     img = Image.open(input_file).convert("L")
