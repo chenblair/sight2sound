@@ -21,7 +21,7 @@ camera.awb_gains = g
 gPic = np.empty((res1 * res1,), dtype=np.uint8)
 gPic = gPic.reshape((res1, res2))
 
-while true:
+while True:
   rgbPic = np.empty((res1 * res1 * 3,), dtype=np.uint8)
   camera.capture(rgbPic, 'rgb')
   rgbPic = rgbPic.reshape((res1, res2, 3))

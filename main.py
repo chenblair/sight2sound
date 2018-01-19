@@ -46,15 +46,6 @@ def isPowOf2(num):
   return ((num & (num - 1)) == 0) and num != 0
 
 def setup_camera_taker():
-  while True:
-    sleep(1)
-    mutex.release()
-
-def main():
-  input_file = '64x64.png'
-
-  # TODO BEGIN SETTING UP CAMERA
-  """
   camera = PiCamera()
   camera.resolution = (64, 64)
   # camera.resolution = (2, 2)
@@ -70,8 +61,13 @@ def main():
 
   for filename in camera.capture_continuous('img{counter:03d}.png'):
     print('Captured %s' % filename)
-  """
-  # END SETTING UP CAMERA
+  
+  while True:
+    mutex.release()
+    sleep(1)
+
+def main():
+  input_file = '64x64.png'
 
   # BEGIN SETTING UP AUDIO OUT
   out = alsaaudio.PCM(alsaaudio.PCM_PLAYBACK, 
@@ -135,9 +131,16 @@ def main():
     #print("Converting...")
 
     # TODO because the amplitudes of the sines are proportional to the pixel intensity, the output is not necessarily between [-1,+1]
+    print(np.ndarray.max(outputAudio))
+    print(np.ndarray.min(outputAudio))
+    diff = np.ndarray.max(outputAudio) - np.ndarray.min(outputAudio)
+    scale = 65536 / diff
+    outputAudio -= np.ndarray.min(outputAudio)
+    outputAudio *= scale
+    """
     outputAudio += 1  
     outputAudio *= 16384 * 2
-
+    """
     byte_data = outputAudio.astype('float32').tobytes()
     out.write(byte_data)
 
