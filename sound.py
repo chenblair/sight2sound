@@ -13,7 +13,7 @@ from threading import Thread, Semaphore
 
 mutex = Semaphore(value=0)
 
-signal_time_length = 10  # in seconds
+signal_time_length = .2  # in seconds
 sample_rate = 44100.0  # in Hz
 
 res1 = 64
@@ -55,10 +55,10 @@ def setup_camera_taker():
       for j in range(res2)
     ] for i in range(res1)]
     mutex.release()
-    sleep(0.7) #TODO TWEAK THIS
+    #sleep(0) #TODO TWEAK THIS
 
 def main():
-  input_file = 'testQuad4.png'
+  #input_file = '64x64.png'
 
   # BEGIN SETTING UP AUDIO OUT
   out = alsaaudio.PCM(alsaaudio.PCM_PLAYBACK, 
@@ -66,7 +66,7 @@ def main():
             mode=alsaaudio.PCM_NONBLOCK)
   out.setchannels(1)
   out.setrate(int(sample_rate))
-  out.setformat(alsaaudio.PCM_FORMAT_S16_LE)
+  out.setformat(alsaaudio.PCM_FORMAT_U32_BE)
   out.setperiodsize(int(sample_rate)) #TODO this may be too big
   # END SETTING UP AUDIO OUT
 
@@ -89,27 +89,25 @@ def main():
 
   while True:
     #print("here2")
-    #mutex.acquire()
-    
+    mutex.acquire()
+    """
     #TODO we shouldn't have to load an image file, just take it directly from camera
     img = Image.open(input_file).convert("L")
     pixels = img.load()
     x, y = img.size
-    
+    """
     #print("Serialising pixels...")
-    output = [pixels[curve[i]] for i in range(x*x)]
+    #output = [pixels[curve[i]] for i in range(x*x)]
     #def f(pvalue): return 0 if pvalue < 128 else 255
     def f(p): return p
     #print("here3")
-    #output = [gPic[curve[i][0]][curve[i][1]] for i in range(res1*res1)]
-    
+    output = [gPic[curve[i][0]][curve[i][1]] for i in range(res1*res1)]
     """
     output = [ 
         pixels[hc.d2xy(math.log(x * y, 2), i)]
         for i in range(x*x)
         ]
     """
-    
     #print("Generating audio...")
     T = 1 / sample_rate  # spacing between sample points
     N = int(sample_rate * signal_time_length)  # number of sample points
@@ -120,11 +118,7 @@ def main():
     for i in range(len(output)):
       fs[int(frequency*T*N)] = output[i] #this will be the amplitude for this frequency
       frequency += frequency_step
-    
-    """
-    fs[int(261*T*N)] = 100000
-    """
-    
+
     outputAudio = np.fft.irfft(fs)
     ### END IRFFT ROUTINE
 
@@ -132,39 +126,18 @@ def main():
     #print("Converting...")
 
     # TODO because the amplitudes of the sines are proportional to the pixel intensity, the output is not necessarily between [-1,+1]
-    print("^^^^^^^^^max")
-    print(np.ndarray.max(outputAudio))
-    print("min")
+    print(np.ndarray.max(outputAudio))#TODO debug remove this
     print(np.ndarray.min(outputAudio))
-    print("mean of audio")
-    print(np.mean(outputAudio))
-    diff = np.ndarray.max(outputAudio) - np.ndarray.min(outputAudio)
-    scale = 65536 / diff
-    #outputAudio -= np.ndarray.min(outputAudio)
-    #outputAudio *= scale #1310.72 / 2
-    #outputAudio *= 14247 / max(np.ndarray.max(outputAudio), np.ndarray.min(outputAudio))
-
-    #outputAudio = np.sin(2*np.pi*440*np.arange(N)*T)
-    #outputAudio += 1  
-    #outputAudio *= 16384 * 2
-    print("rescaled outputAudio\nmax")
-    print(np.ndarray.max(outputAudio))
-    print("min")
-    print(np.ndarray.min(outputAudio))
-    print("mean of audio")
-    print(np.mean(outputAudio))
-
-    byte_data = outputAudio.astype('float16').tobytes()
+    #diff = np.ndarray.max(outputAudio) - np.ndarray.min(outputAudio)
+    #scale = 65536 / diff
+    outputAudio -= np.ndarray.min(outputAudio)
+    outputAudio *= 1310.72
+    """
+    outputAudio += 1  
+    outputAudio *= 16384 * 2
+    """
+    
+    byte_data = outputAudio.astype('float32').tobytes()
     out.write(byte_data)
-    
-    
-    import wave
-    with open("a4.wav","wb") as f:
-      wavout = wave.open(f,'wb')
-      wavout.setparams((1,2,44100,0,'NONE','not compressed'))
-      wavout.writeframes(byte_data)
-    print("sleeping")
-    sleep(20)
-    
 
 if __name__ == '__main__': main()
