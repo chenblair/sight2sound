@@ -3,7 +3,7 @@
 # The input file must be grayscale
 
 import hilbert_curve as hc
-from PIL import Image
+#from PIL import Image
 import math
 from time import sleep
 import alsaaudio
@@ -114,11 +114,13 @@ def main():
 
     ### BEGIN IRFFT ROUTINE
     fs = np.zeros(N//2 + 1)
+    """
     frequency = lowest_frequency
     for i in range(len(output)):
       fs[int(frequency*T*N)] = output[i] #this will be the amplitude for this frequency
       frequency += frequency_step
-
+    """
+    fs[int(440*T*N)] = 255
     outputAudio = np.fft.irfft(fs)
     ### END IRFFT ROUTINE
 
@@ -136,7 +138,7 @@ def main():
     outputAudio += 1  
     outputAudio *= 16384 * 2
     """
-    
+
     byte_data = outputAudio.astype('float32').tobytes()
     out.write(byte_data)
 
