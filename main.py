@@ -11,7 +11,7 @@ from picamera import PiCamera
 import numpy as np
 from threading import Thread, Semaphore
 
-mutex = Sempahore(value=0)
+mutex = Semaphore(value=0)
 
 signal_time_length = 1  # in seconds
 sample_rate = 44100.0  # in Hz
