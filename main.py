@@ -80,9 +80,9 @@ def main():
   ]
   # END SETTING UP HILBERT CURVE
 
-  lowest_frequency = 220  # In hz!
+  lowest_frequency = 50  # In hz!
   highest_frequency = 8410
-  frequency_step = 2
+  frequency_step = (highest_frequency - lowest_frequency)/(res1*res1)
 
   while True:
     mutex.acquire()
