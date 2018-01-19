@@ -4,7 +4,7 @@
 
 import hilbert_curve as hc
 from PIL import Image
-#import math
+import math
 from time import sleep
 import alsaaudio
 from picamera import PiCamera
