@@ -112,7 +112,7 @@ def main():
     fs = np.zeros(N//2 + 1)
     frequency = lowest_frequency
     for i in range(len(output)):
-      fs[int(frequency*T*N)] = 1 / 255 * output[i] #this will be the amplitude for this frequency
+      fs[int(frequency*T*N)] = output[i] #this will be the amplitude for this frequency
       frequency += frequency_step
 
     outputAudio = np.fft.irfft(fs)
