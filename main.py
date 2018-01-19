@@ -27,7 +27,6 @@ if ((res1 != res2) or not isPowOf2(res1)):
 
 gPic = None
 
-
 def setup_camera_taker():
   camera = PiCamera()
   camera.resolution = (res1, res2)
@@ -95,7 +94,7 @@ def main():
     """
     #print("Serialising pixels...")
     #output = [pixels[curve[i]] for i in range(x*x)]
-    output = [gPic[curve[i][0]][curve[i][1]] for i in range(x*x)]
+    output = [gPic[curve[i][0]][curve[i][1]] for i in range(res1*res1)]
 
     """
     output = [ 
