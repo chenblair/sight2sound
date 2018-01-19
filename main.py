@@ -125,10 +125,10 @@ def main():
     # TODO because the amplitudes of the sines are proportional to the pixel intensity, the output is not necessarily between [-1,+1]
     print(np.ndarray.max(outputAudio))#TODO debug remove this
     print(np.ndarray.min(outputAudio))
-    diff = np.ndarray.max(outputAudio) - np.ndarray.min(outputAudio)
-    scale = 65536 / diff
+    #diff = np.ndarray.max(outputAudio) - np.ndarray.min(outputAudio)
+    #scale = 65536 / diff
     outputAudio -= np.ndarray.min(outputAudio)
-    outputAudio *= scale
+    outputAudio *= 1310.72
     """
     outputAudio += 1  
     outputAudio *= 16384 * 2
