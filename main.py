@@ -130,14 +130,14 @@ def main():
     # TODO because the amplitudes of the sines are proportional to the pixel intensity, the output is not necessarily between [-1,+1]
     print(np.ndarray.max(outputAudio))#TODO debug remove this
     print(np.ndarray.min(outputAudio))
-    #diff = np.ndarray.max(outputAudio) - np.ndarray.min(outputAudio)
-    #scale = 65536 / diff
+    diff = np.ndarray.max(outputAudio) - np.ndarray.min(outputAudio)
+    scale = 65536 / diff
     outputAudio -= np.ndarray.min(outputAudio)
     outputAudio *= 1310.72
 
-    outputAudio = np.sin(2*np.pi*440*np.arange(N)*T)
-    outputAudio += 1  
-    outputAudio *= 16384 * 2
+    #outputAudio = np.sin(2*np.pi*440*np.arange(N)*T)
+    #outputAudio += 1  
+    #outputAudio *= 16384 * 2
     print("max")
     print(np.ndarray.max(outputAudio))
     print("min")
@@ -151,10 +151,8 @@ def main():
     with open("A440.wav","wb") as f:
       wavout = wave.open(f,'wb')
       wavout.setparams((1,4,44100,0,'NONE','not compressed'))
-      wavout.writeframes(outputAudio.astype('float32').tobytes())
+      wavout.writeframes(byte_data)
     print("sleeping")
     sleep(20)
-    print("exiting")
-    exit()
 
 if __name__ == '__main__': main()
