@@ -16,8 +16,8 @@ mutex = Semaphore(value=0)
 signal_time_length = .2  # in seconds
 sample_rate = 44100.0  # in Hz
 
-res1 = 32
-res2 = 32
+res1 = 64
+res2 = 64
 
 def isPowOf2(num):
   return ((num & (num - 1)) == 0) and num != 0
@@ -43,11 +43,11 @@ def setup_camera_taker():
   
   while True:
     rgbPic = np.empty((res1 * res1 * 3,), dtype=np.uint8)
-    print("before capture")
+    #print("before capture")
     camera.capture(rgbPic, 'rgb')
-    print("after capture")
+    #print("after capture")
     rgbPic = rgbPic.reshape((res1, res1, 3))
-    print("here")
+    #print("here")
 
     global gPic
     gPic = [[
@@ -88,7 +88,7 @@ def main():
   frequency_step = (highest_frequency - lowest_frequency)/(res1*res1)
 
   while True:
-    print("here2")
+    #print("here2")
     mutex.acquire()
     """
     #TODO we shouldn't have to load an image file, just take it directly from camera
@@ -100,7 +100,7 @@ def main():
     #output = [pixels[curve[i]] for i in range(x*x)]
     #def f(pvalue): return 0 if pvalue < 128 else 255
     def f(p): return p
-    print("here3")
+    #print("here3")
     output = [gPic[curve[i][0]][curve[i][1]] for i in range(res1*res1)]
     """
     output = [ 
@@ -108,7 +108,7 @@ def main():
         for i in range(x*x)
         ]
     """
-    print("Generating audio...")
+    #print("Generating audio...")
     T = 1 / sample_rate  # spacing between sample points
     N = int(sample_rate * signal_time_length)  # number of sample points
 
@@ -136,6 +136,7 @@ def main():
     outputAudio += 1  
     outputAudio *= 16384 * 2
     """
+    
     byte_data = outputAudio.astype('float32').tobytes()
     out.write(byte_data)
 
