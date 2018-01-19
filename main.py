@@ -13,7 +13,7 @@ from threading import Thread, Semaphore
 
 mutex = Semaphore(value=0)
 
-signal_time_length = .2  # in seconds
+signal_time_length = 10  # in seconds
 sample_rate = 44100.0  # in Hz
 
 res1 = 64
@@ -134,6 +134,7 @@ def main():
     #scale = 65536 / diff
     outputAudio -= np.ndarray.min(outputAudio)
     outputAudio *= 1310.72
+
     outputAudio = np.sin(2*np.pi*440*np.arange(N*T))
 
     
@@ -142,5 +143,6 @@ def main():
 
     byte_data = outputAudio.astype('float32').tobytes()
     out.write(byte_data)
+    exit()
 
 if __name__ == '__main__': main()
