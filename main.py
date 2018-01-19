@@ -128,8 +128,12 @@ def main():
     #print("Converting...")
 
     # TODO because the amplitudes of the sines are proportional to the pixel intensity, the output is not necessarily between [-1,+1]
-    print(np.ndarray.max(outputAudio))#TODO debug remove this
+    print("max")
+    print(np.ndarray.max(outputAudio))
+    print("min")
     print(np.ndarray.min(outputAudio))
+    print("mean of audio")
+    print(np.mean(outputAudio))
     diff = np.ndarray.max(outputAudio) - np.ndarray.min(outputAudio)
     scale = 65536 / diff
     outputAudio -= np.ndarray.min(outputAudio)
@@ -138,7 +142,7 @@ def main():
     #outputAudio = np.sin(2*np.pi*440*np.arange(N)*T)
     #outputAudio += 1  
     #outputAudio *= 16384 * 2
-    print("max")
+    print("rescaled outputAudio\nmax")
     print(np.ndarray.max(outputAudio))
     print("min")
     print(np.ndarray.min(outputAudio))
