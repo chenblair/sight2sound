@@ -16,8 +16,8 @@ mutex = Semaphore(value=0)
 signal_time_length = 1  # in seconds
 sample_rate = 44100.0  # in Hz
 
-res1 = 64
-res2 = 64
+res1 = 2048
+res2 = 2048
 
 def isPowOf2(num):
   return ((num & (num - 1)) == 0) and num != 0
@@ -72,11 +72,10 @@ def main():
   t.start()
 
   # BEGIN SETTING UP HILBERT CURVE
-  sizex = 64
-  sizey = 64 #TODO make this dependent on the camera taken pics
+  q = math.log(res1 * res1, 2)
   curve = [ # curve is list of tuples along hc
-    hc.d2xy(math.log(sizex * sizey, 2), i) 
-    for i in range(sizex*sizex)
+    hc.d2xy(q, i) 
+    for i in range(res1 * res1)
   ]
   # END SETTING UP HILBERT CURVE
 
