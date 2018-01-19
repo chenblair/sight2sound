@@ -4,7 +4,7 @@
 
 import hilbert_curve as hc
 from PIL import Image
-#import math
+import math
 from time import sleep
 import alsaaudio
 from picamera import PiCamera
@@ -90,7 +90,7 @@ def main():
   sizex = 64
   sizey = 64 #TODO make this dependent on the camera taken pics
   curve = [ # curve is list of tuples along hc
-    hc.d2xy(int(np.log(sizex * sizey, 2)), i) 
+    hc.d2xy(math.log(sizex * sizey, 2), i) 
     for i in range(sizex*sizex)
   ]
   # END SETTING UP HILBERT CURVE
