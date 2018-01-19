@@ -58,7 +58,7 @@ def setup_camera_taker():
     sleep(0.7) #TODO TWEAK THIS
 
 def main():
-  input_file = 'testQuad2.png'
+  input_file = 'testQuad1.png'
 
   # BEGIN SETTING UP AUDIO OUT
   out = alsaaudio.PCM(alsaaudio.PCM_PLAYBACK, 
