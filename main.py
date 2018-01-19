@@ -13,7 +13,7 @@ from threading import Thread, Semaphore
 
 mutex = Semaphore(value=0)
 
-signal_time_length = .1  # in seconds
+signal_time_length = .2  # in seconds
 sample_rate = 44100.0  # in Hz
 
 res1 = 64
