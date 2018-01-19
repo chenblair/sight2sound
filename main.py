@@ -84,7 +84,7 @@ def main():
   # END SETTING UP HILBERT CURVE
 
   lowest_frequency = 50  # In hz!
-  highest_frequency = 8410
+  highest_frequency = 20000 #8410
   frequency_step = (highest_frequency - lowest_frequency)/(res1*res1)
 
   while True:
@@ -121,12 +121,12 @@ def main():
     for i in range(len(output)):
       fs[int(frequency*T*N)] = output[i] #this will be the amplitude for this frequency
       frequency += frequency_step
-    
+    """
     with open(input_file+".Freqs.txt","w") as f:
       for i in range(len(fs)):
         f.write(str(fs[i]))
         f.write("\n")
-    
+    """
     #fs[int(261*T*N)] = 1
     
     outputAudio = np.fft.irfft(fs)
@@ -136,6 +136,7 @@ def main():
     #print("Converting...")
 
     # TODO because the amplitudes of the sines are proportional to the pixel intensity, the output is not necessarily between [-1,+1]
+    """
     print("^^^^^^^^^max")
     print(np.ndarray.max(outputAudio))
     print("min")
@@ -158,11 +159,11 @@ def main():
     print(np.ndarray.min(outputAudio))
     print("mean of audio")
     print(np.mean(outputAudio))
+    """
 
     byte_data = outputAudio.astype('float16').tobytes()
     out.write(byte_data)
-    
-    
+    """
     import wave
     with open(input_file+"1e-100.wav","wb") as f:
       wavout = wave.open(f,'wb')
@@ -170,6 +171,6 @@ def main():
       wavout.writeframes(byte_data)
     print("sleeping")
     sleep(20)
-    
+    """
 
 if __name__ == '__main__': main()
