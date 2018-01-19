@@ -16,8 +16,8 @@ mutex = Semaphore(value=0)
 signal_time_length = .2  # in seconds
 sample_rate = 44100.0  # in Hz
 
-res1 = 128
-res2 = 128
+res1 = 32
+res2 = 32
 
 def isPowOf2(num):
   return ((num & (num - 1)) == 0) and num != 0
@@ -43,6 +43,7 @@ def setup_camera_taker():
   
   while True:
     rgbPic = np.empty((res1 * res1 * 3,), dtype=np.uint8)
+    print("before capture")
     camera.capture(rgbPic, 'rgb')
     rgbPic = rgbPic.reshape((res1, res1, 3))
     print("here")
