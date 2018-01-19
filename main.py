@@ -53,7 +53,7 @@ def setup_camera_taker():
     ] for i in range(res1)]
     #print("here")
     mutex.release()
-    sleep(.8) #TODO TWEAK THIS
+    sleep(.7) #TODO TWEAK THIS
 
 def main():
   #input_file = '64x64.png'
