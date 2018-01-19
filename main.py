@@ -149,7 +149,7 @@ def main():
     print("mean of audio")
     print(np.mean(outputAudio))
 
-    byte_data = outputAudio.astype('float32').tobytes()
+    byte_data = outputAudio.astype('float16').tobytes()
     #out.write(byte_data)
     import wave
     with open("A440.wav","wb") as f:
