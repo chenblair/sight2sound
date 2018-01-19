@@ -123,7 +123,7 @@ def main():
       frequency += frequency_step
     """
     
-    fs[int(261*T*N)] = 100000
+    fs[int(261*T*N)] = 1
     
     
     outputAudio = np.fft.irfft(fs)
@@ -160,7 +160,7 @@ def main():
     
     
     import wave
-    with open("cmiddle.wav","wb") as f:
+    with open("cmiddleSmall.wav","wb") as f:
       wavout = wave.open(f,'wb')
       wavout.setparams((1,2,44100,0,'NONE','not compressed'))
       wavout.writeframes(byte_data)
