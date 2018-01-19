@@ -13,7 +13,7 @@ from threading import Thread, Semaphore
 
 mutex = Semaphore(value=0)
 
-signal_time_length = 10  # in seconds
+signal_time_length = .7  # in seconds
 sample_rate = 44100.0  # in Hz
 
 res1 = 64
@@ -55,7 +55,7 @@ def setup_camera_taker():
       for j in range(res2)
     ] for i in range(res1)]
     mutex.release()
-    sleep(0.7) #TODO TWEAK THIS
+    #sleep(0.7) #TODO TWEAK THIS
 
 def main():
   input_file = 'testQuad4.png'
