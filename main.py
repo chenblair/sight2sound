@@ -89,19 +89,19 @@ def main():
 
   while True:
     #print("here2")
-    #mutex.acquire()
+    mutex.acquire()
     
     #TODO we shouldn't have to load an image file, just take it directly from camera
-    img = Image.open(input_file).convert("L")
-    pixels = img.load()
-    x, y = img.size
+    #img = Image.open(input_file).convert("L")
+    #pixels = img.load()
+    #x, y = img.size
     
     #print("Serialising pixels...")
-    output = [pixels[curve[i]] for i in range(x*x)]
+    #output = [pixels[curve[i]] for i in range(x*x)]
     #def f(pvalue): return 0 if pvalue < 128 else 255
     def f(p): return p
     #print("here3")
-    #output = [gPic[curve[i][0]][curve[i][1]] for i in range(res1*res1)]
+    output = [gPic[curve[i][0]][curve[i][1]] for i in range(res1*res1)]
     
     """
     output = [ 
@@ -143,7 +143,9 @@ def main():
     print(np.ndarray.min(outputAudio))
     print("mean of audio")
     print(np.mean(outputAudio))
+    """
     outputAudio *=1e-100
+    """
     #diff = np.ndarray.max(outputAudio) - np.ndarray.min(outputAudio)
     #scale = 65536 / diff
     #outputAudio -= np.ndarray.min(outputAudio)
