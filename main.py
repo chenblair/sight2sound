@@ -120,7 +120,7 @@ def main():
       fs[int(frequency*T*N)] = output[i] #this will be the amplitude for this frequency
       frequency += frequency_step
     """
-    fs[int(440*T*N)] = 255
+    fs[int(440*T*N)] = 1000
     outputAudio = np.fft.irfft(fs)
     ### END IRFFT ROUTINE
 
