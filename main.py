@@ -45,7 +45,7 @@ def setup_camera_taker():
     rgbPic = np.empty((res1 * res1 * 3,), dtype=np.uint8)
     camera.capture(rgbPic, 'rgb')
     rgbPic = rgbPic.reshape((res1, res2, 3))
-    #print("here")
+    print("here")
 
     global gPic
     gPic = [[
@@ -105,7 +105,7 @@ def main():
         for i in range(x*x)
         ]
     """
-    #print("Generating audio...")
+    print("Generating audio...")
     T = 1 / sample_rate  # spacing between sample points
     N = int(sample_rate * signal_time_length)  # number of sample points
 
