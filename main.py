@@ -53,7 +53,8 @@ def setup_camera_taker():
 def main():
   input_file = '64x64.png'
 
-  # BEGIN SETTING UP CAMERA
+  # TODO BEGIN SETTING UP CAMERA
+  """
   camera = PiCamera()
   camera.resolution = (64, 64)
   # camera.resolution = (2, 2)
@@ -69,6 +70,7 @@ def main():
 
   for filename in camera.capture_continuous('img{counter:03d}.png'):
     print('Captured %s' % filename)
+  """
   # END SETTING UP CAMERA
 
   # BEGIN SETTING UP AUDIO OUT
@@ -84,25 +86,37 @@ def main():
   t = Thread(target=setup_camera_taker)
   t.start()
 
+  # BEGIN SETTING UP HILBERT CURVE
+  sizex = 64
+  sizey = 64 #TODO make this dependent on the camera taken pics
+  curve = [ # curve is list of tuples along hc
+    hc.d2xy(math.log(sizex * sizey, 2), i) 
+    for i in range(sizex*sizex)
+  ]
+  # END SETTING UP HILBERT CURVE
+
   lowest_frequency = 220  # In hz!
   highest_frequency = 8410
   frequency_step = 2
 
   while True:
     mutex.acquire()
+    
+    #TODO we shouldn't have to load an image file, just take it directly from camera
     img = Image.open(input_file).convert("L")
     pixels = img.load()
-
     x, y = img.size
     if ((x != y) or !isPowOf2(x)):
       exit("The image has to be a power of 2.")
 
     #print("Serialising pixels...")
-    output = [ #TODO remember the hc, for faster processing of future images
+    output = [pixels[curve[i]] for i in range(x*x)]
+    """
+    output = [ 
         pixels[hc.d2xy(math.log(x * y, 2), i)]
         for i in range(x*x)
         ]
-
+    """
     #print("Generating audio...")
     T = 1 / sample_rate  # spacing between sample points
     N = int(sample_rate * signal_time_length)  # number of sample points
