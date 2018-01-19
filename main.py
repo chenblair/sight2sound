@@ -124,7 +124,7 @@ def main():
     
     with open("pixelIntensitysQuad3.txt","w") as f:
       for i in range(len(fs)):
-        f.write(fs[i])
+        f.write(str(fs[i]))
         f.write("\n")
 
     #fs[int(261*T*N)] = 1
