@@ -16,8 +16,8 @@ mutex = Semaphore(value=0)
 signal_time_length = 1  # in seconds
 sample_rate = 44100.0  # in Hz
 
-res1 = 64
-res2 = 64
+res1 = 2048
+res2 = 2048
 
 def isPowOf2(num):
   return ((num & (num - 1)) == 0) and num != 0
