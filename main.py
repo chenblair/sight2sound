@@ -123,7 +123,7 @@ def main():
       frequency += frequency_step
     
     with open("pixelIntensitysQuad3.txt","wb") as f:
-      for i in range(len(fs))
+      for i in range(len(fs))L
         f.write(fs[i])
         f.write('\n')
 
