@@ -51,7 +51,7 @@ def setup_camera_taker():
       (0.3 * rgbPic[i][j][0]) + (0.59 * rgbPic[i][j][1]) + (0.11 * rgbPic[i][j][2])
       for j in range(res2)
     ] for i in range(res1)]
-    print("here")
+    #print("here")
     mutex.release()
     sleep(.8) #TODO TWEAK THIS
 
@@ -121,8 +121,8 @@ def main():
     #print("Converting...")
 
     # TODO because the amplitudes of the sines are proportional to the pixel intensity, the output is not necessarily between [-1,+1]
-    print(np.ndarray.max(outputAudio))#TODO debug remove this
-    print(np.ndarray.min(outputAudio))
+    #print(np.ndarray.max(outputAudio))#TODO debug remove this
+    #print(np.ndarray.min(outputAudio))
     diff = np.ndarray.max(outputAudio) - np.ndarray.min(outputAudio)
     scale = 65536 / diff
     outputAudio -= np.ndarray.min(outputAudio)
