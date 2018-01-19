@@ -58,7 +58,7 @@ def setup_camera_taker():
     sleep(0.7) #TODO TWEAK THIS
 
 def main():
-  input_file = 'testQuad3.png'
+  input_file = 'testQuad1.png'
 
   # BEGIN SETTING UP AUDIO OUT
   out = alsaaudio.PCM(alsaaudio.PCM_PLAYBACK, 
@@ -122,11 +122,11 @@ def main():
       fs[int(frequency*T*N)] = output[i] #this will be the amplitude for this frequency
       frequency += frequency_step
     
-    with open("pixelIntensitysQuad3.txt","w") as f:
+    with open(input_file+".Freqs.txt","w") as f:
       for i in range(len(fs)):
         f.write(str(fs[i]))
         f.write("\n")
-
+    
     #fs[int(261*T*N)] = 1
     
     outputAudio = np.fft.irfft(fs)
