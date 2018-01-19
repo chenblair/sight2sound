@@ -116,12 +116,13 @@ def main():
 
     ### BEGIN IRFFT ROUTINE
     fs = np.zeros(N//2 + 1)
-    
+    """
     frequency = lowest_frequency
     for i in range(len(output)):
       fs[int(frequency*T*N)] = output[i] #this will be the amplitude for this frequency
       frequency += frequency_step
-    #fs[int(261*T*N)] = 1
+    """
+    fs[int(261*T*N)] = 1
     
     outputAudio = np.fft.irfft(fs)
     ### END IRFFT ROUTINE
@@ -158,7 +159,7 @@ def main():
     
     
     import wave
-    with open("testQuad4test2smaller2.wav","wb") as f:
+    with open("cmiddle1e-12.wav","wb") as f:
       wavout = wave.open(f,'wb')
       wavout.setparams((1,2,44100,0,'NONE','not compressed'))
       wavout.writeframes(byte_data)
