@@ -1,12 +1,11 @@
 # Sight to Sound
-This raspberry pi project programmed in Python3 tranforms image input to soundscapes. This hypothetically can help blind people perceive their surroundings. How does it work? Present in every clip of audio are different sound frequencies with different amplitudes. We then map this frequency domain (which is 1 dimension) to the 2 dimensional pixel array that is the Image through a Hilbert curve. So each region of pixels in the Image corresponds to a region(s) of frequencies in the frequencies.
-We then simply make the amplitude of the frequency correspond to the pixel intensity. 
+This raspberry pi project programmed in Python3 tranforms image input to soundscapes. This hypothetically can help blind people perceive their surroundings. How does it work? Present in every clip of audio are different sound frequencies with different amplitudes. We then use a Hilbert curve to map this frequency domain (which is 1 dimension) to the 2 dimensional Image. So each pixel in the Image corresponds to a unique frequency. We then simply make the amplitude of the frequency correspond to the pixel intensity in greyscale. 
 
 To run, simply run `python3 main.py`
 
 ## Dependencies
 * python3
-* numpy (for numpy.fft.irfft)
+* numpy (for `numpy.fft.irfft`)
 * alsaaudio
 * picamera
 * hilbert_curve (custom code for producing hilbert curve)
@@ -22,9 +21,13 @@ Finally, the algorithm plays .8 seconds (constant stored as `signal_time_length`
 
 ## Team
 + shguan10
-+ wz2
++ 17zhangw
++ unbrace3
++ ramvenkat98
++ imjal
 
 ## Acknowledgements
 We would like to acknowledge the following sources:
-* 3Brown1Blue (an awesome youtube channel that made a great video on the Hilbert curve and its potential use in mapping visual space to audio space.
-
+* 3Brown1Blue (an awesome youtube channel that made a [great video](https://www.youtube.com/watch?v=3s7h2MHQtxc) on the Hilbert curve and its potential use in mapping visual space to audio space).
+* Build18 board and sponsers. [Build18](https://build18.herokuapp.com/) is the 4.5-day hackathon in which we completed this project. The hackathon provided us with funding for building materials, space for working, and snacks to keep us going.
+* minerscale for open-sourcing initial (if extremely inefficient) [code](https://github.com/minerscale/sight-as-sound).
