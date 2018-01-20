@@ -9,7 +9,7 @@ To run, simply run `python3 main.py`
 * numpy (for `numpy.fft.irfft`)
 * alsaaudio
 * picamera
-* hilbert_curve (custom code for producing hilbert curve)
+* hilbert_curve (found [here](https://people.sc.fsu.edu/~jburkardt/py_src/hilbert_curve/))
 * PIL (python image library)
 * threading
 
