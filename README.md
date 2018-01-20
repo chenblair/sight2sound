@@ -18,7 +18,7 @@ The `hilbert_curve` library that we found produces hilbert curves in a fairly in
 
 Also, for some unknown reason to us, the `write` function provided in alsaaudio normalizes (?) the amplitudes of the signal passed in, so when we used the function to write a sine curve with amplitude `1e-12`, it produced loud audio exactly the same as with amplitude `1e0`.
 
-Finally, the algorithm plays .8 seconds (constant stored as `signal_time_length`) of audio for each image, and then after that .8 second period it will capture a new image. This creates a refresh period of around 1 second for the audio out. Theoretically, we should be able to change the `signal_time_length` to a smaller period, but there is something weird the python interpreter does with thread locks which does not make it work.
+Finally, the algorithm plays .8 seconds (constant stored as `signal_time_length`) of audio for each image, and then after that .8 second period it will capture a new image. This creates a refresh period of around 1 second for the audio out. Theoretically, we should be able to change the `signal_time_length` to a smaller period, but there is something weird the python interpreter does with thread locks which prevents it from working.
 
 ## Team
 + [shguan10](https://github.com/shguan10/)
