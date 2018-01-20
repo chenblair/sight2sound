@@ -1,4 +1,4 @@
-# pythone 3
+# python 3
 
 # The input file must be grayscale
 
@@ -11,9 +11,8 @@ from picamera import PiCamera
 import numpy as np
 from threading import Thread, Semaphore
 
-mutex = Semaphore(value=0)
-cameraSem = Semaphore(value=1)
-
+#==========================================
+#CONSTANTS
 signal_time_length = 0.8  # in seconds
 sample_rate = 44100.0  # in Hz
 
@@ -23,6 +22,10 @@ frequency_step = (highest_frequency - lowest_frequency)/(res1*res1)
 
 res1 = 64
 res2 = 64
+#==========================================
+
+mutex = Semaphore(value=0)
+cameraSem = Semaphore(value=1)
 
 def isPowOf2(num):
   return ((num & (num - 1)) == 0) and num != 0
