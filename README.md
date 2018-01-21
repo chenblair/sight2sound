@@ -8,6 +8,8 @@ To run, simply run `python3 main.py`.
 " target="_blank"><img src="http://img.youtube.com/vi/1P_RSq-vCUA/0.jpg" 
 alt="Youtube demo" width="240" height="180" border="10" /></a>
 
+*Please excuse our poor videography! We filmed this in a one-take at the end of the hackathon, so we were very tired.*
+
 ## Dependencies
 * python3
 * Raspberry pi3
