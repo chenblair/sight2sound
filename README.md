@@ -1,7 +1,12 @@
 # Sight to Sound
 This raspberry pi3 project programmed in Python3 tranforms image input to soundscapes. This hypothetically can help blind people perceive their surroundings. How does it work? Present in every clip of audio are different sound frequencies with different amplitudes. We then use a Hilbert curve to map this frequency domain (which is 1 dimension) to the 2 dimensional Image. So each pixel in the Image corresponds to a unique frequency. We then simply make the amplitude of the frequency correspond to the pixel intensity in greyscale. Watch a Youtube [video](https://www.youtube.com/watch?v=3s7h2MHQtxc) that explains the concepts better.
 
-To run, simply run `python3 main.py`. [Click](https://www.youtube.com/watch?v=1P_RSq-vCUA&feature=youtu.be) to see a demo.
+To run, simply run `python3 main.py`.
+
+## Demo
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=1P_RSq-vCUA
+" target="_blank"><img src="http://img.youtube.com/vi/1P_RSq-vCUA/0.jpg" 
+alt="Youtube demo" width="240" height="180" border="10" /></a>
 
 ## Dependencies
 * python3
