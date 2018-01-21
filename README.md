@@ -11,14 +11,17 @@ alt="Youtube demo" width="240" height="180" border="10" /></a>
 *Please excuse our poor videography! We filmed this in a one-take at the end of the hackathon, so we were very tired.*
 
 ## Dependencies
-* python3
-* Raspberry pi3
-* numpy (for `numpy.fft.irfft`)
-* alsaaudio
-* picamera
-* hilbert_curve (found [here](https://people.sc.fsu.edu/~jburkardt/py_src/hilbert_curve/))
-* PIL (python image library)
-* threading
+1. Software
+  * python3
+  * numpy (for `numpy.fft.irfft`)
+  * alsaaudio
+  * picamera
+  * hilbert_curve (found [here](https://people.sc.fsu.edu/~jburkardt/py_src/hilbert_curve/))
+  * PIL (python image library)
+  * threading
+2. Hardware
+  * [Raspberry pi3](https://www.amazon.com/Raspberry-Pi-RASPBERRYPI3-MODB-1GB-Model-Motherboard/dp/B01CD5VC92)
+  * [Raspberry Pi Camera](https://www.adafruit.com/product/3099)
 
 ## Caveats
 The `hilbert_curve` library that we found produces hilbert curves in a fairly inefficient manner, so increasing the resolution from 64x64 to 2048x2048, for example, may run for an obscenely long time preparing the curve.
