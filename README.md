@@ -39,7 +39,7 @@ Finally, the algorithm plays .8 seconds (constant stored as `signal_time_length`
 
 ## Acknowledgements
 We would like to acknowledge the following:
-* Build18 board and sponsers. [Build18](https://build18.herokuapp.com/) is the 4.5-day hackathon in which we completed this project. The hackathon provided us with funding for building materials, space for working, and snacks to keep us going.
+* Build18 officers and sponsers. [Build18](https://build18.herokuapp.com/) is the 4.5-day hackathon in which we completed this project. The hackathon provided us with funding for building materials, space for working, and snacks to keep us going.
 * 3Brown1Blue (an awesome youtube channel that made a [great video](https://www.youtube.com/watch?v=3s7h2MHQtxc) on the Hilbert curve and its potential use in mapping visual space to audio space).
 * minerscale for open-sourcing initial (if extremely inefficient) [code](https://github.com/minerscale/sight-as-sound).
 * jburkardt for providing [hilbert curve code](https://people.sc.fsu.edu/~jburkardt/py_src/hilbert_curve/)
